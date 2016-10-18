@@ -8,13 +8,21 @@
 
 import UIKit
 
+/*
+ Callable Methods
+ func defineType(type: TextFieldType)
+ func textIsValidated() -> Bool
+ */
+
 // Enum For Types of TextField
 // To Add More In The Future
 enum TextFieldType
 {
     case None
-    case Name
     case Email
+    case FirstName
+    case LastName
+    case FullName
     case Password
 }
 
@@ -22,10 +30,10 @@ class SATextField: UITextField
 {
     // Variables For SATextField
     // Should Only Use DefineType For Setting This Variable
-    private var type: TextFieldType?
+    private var type: TextFieldType = .None
     private var isValidated: Bool = false
     
-//______________________________________________________________
+    //______________________________________________________________
     // Override Initializers
     init(frame: CGRect, type: TextFieldType)
     {
@@ -47,39 +55,48 @@ class SATextField: UITextField
         defineType(type: .None);
     }
     
-//______________________________________________________________
+    //______________________________________________________________
     // Define TextField Properties Based Type
     func defineType(type: TextFieldType)
     {
         self.type = type
-        if(type == .None)
+        
+        switch type
         {
-            self.autocapitalizationType = .none
-            self.isSecureTextEntry = false
-        }
-        else if(type == .Email)
-        {
-            self.autocapitalizationType = .none
-            self.isSecureTextEntry = false
-            self.placeholder = " Email"
-        }
-        else if(type == .Name)
-        {
-            self.autocapitalizationType = .words
-            self.isSecureTextEntry = false
-            self.placeholder = " Name"
-        }
-        else if(type == .Password)
-        {
-            self.autocapitalizationType = .none
-            self.isSecureTextEntry = true
-            self.placeholder = " Password"
+            case .FullName:
+                self.autocapitalizationType = .words
+                self.isSecureTextEntry = false
+                self.placeholder = " Full Name"
+            
+            case .FirstName:
+                self.autocapitalizationType = .words
+                self.isSecureTextEntry = false
+                self.placeholder = " First Name"
+            
+            case .LastName:
+                self.autocapitalizationType = .words
+                self.isSecureTextEntry = false
+                self.placeholder = " Last Name"
+            
+            case .Email:
+                self.autocapitalizationType = .none
+                self.isSecureTextEntry = false
+                self.placeholder = " Email"
+            
+            case .Password:
+                self.autocapitalizationType = .none
+                self.isSecureTextEntry = true
+                self.placeholder = " Password"
+            
+            default:
+                self.autocapitalizationType = .none
+                self.isSecureTextEntry = false
         }
         
         self.autocorrectionType = .no
     }
     
-//______________________________________________________________
+    //______________________________________________________________
     // Validates Input Based On Type
     // Call This Function From TextField Delegate: func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     func containsValidInput(range: NSRange, string: String, shouldUpdateUI : Bool)
@@ -134,15 +151,18 @@ class SATextField: UITextField
                 self.highlightBorderRed()
             }
         }
+        
+        // Keep Each TextFields Text Trimmed
+        self.text = replacementString
     }
     
     // Returns If TextField's Text Is Validated
     func textIsValidated() -> Bool
-    {        
+    {
         return self.isValidated;
     }
     
-//______________________________________________________________
+    //______________________________________________________________
     // Private methods to handle UI highlighting
     private func highlightBorderRed()
     {

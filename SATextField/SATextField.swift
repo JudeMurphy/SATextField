@@ -22,7 +22,6 @@ enum TextFieldType
     case Email
     case FirstName
     case LastName
-    case FullName
     case Password
 }
 
@@ -63,11 +62,6 @@ class SATextField: UITextField
         
         switch type
         {
-            case .FullName:
-                self.autocapitalizationType = .words
-                self.isSecureTextEntry = false
-                self.placeholder = " Full Name"
-            
             case .FirstName:
                 self.autocapitalizationType = .words
                 self.isSecureTextEntry = false
@@ -102,11 +96,16 @@ class SATextField: UITextField
     func containsValidInput(range: NSRange, string: String, shouldUpdateUI : Bool)
     {
         // Gets Current String In Corresponding TextField
-        let text: NSString = (self.text?.trim() ?? "") as NSString
+        let text: NSString = (self.text ?? "") as NSString
         let replacementString = text.replacingCharacters(in: range, with: string)
         
+        // Required To Fix Validation Bug
+        if string == " "
+        {
+            // Do Nothing
+        }
         // Check If There Is Any Text
-        if(replacementString.characters.count == 0)
+        else if(replacementString.characters.count == 0)
         {
             self.isValidated = false
         }
@@ -151,9 +150,6 @@ class SATextField: UITextField
                 self.highlightBorderRed()
             }
         }
-        
-        // Keep Each TextFields Text Trimmed
-        self.text = replacementString
     }
     
     // Returns If TextField's Text Is Validated

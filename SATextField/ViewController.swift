@@ -23,7 +23,7 @@ class ViewController: UIViewController, UITextFieldDelegate
         textFieldExample1.center = self.view.center
         textFieldExample1.delegate = self
         self.view.addSubview(textFieldExample1)
-                
+        
         // 2nd Example Declaration Of Type
         textFieldExample2 = SATextField(frame: CGRect(x: 100, y: 175, width: 200, height: 50), type: .Password)
         textFieldExample2.backgroundColor = UIColor.gray
@@ -36,17 +36,20 @@ class ViewController: UIViewController, UITextFieldDelegate
     // Example Of How To Utilize Built-In Validation Features Of SATextField
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
-        if textField == textFieldExample1
+        // Don't Allow The User To Enter A Space
+        if textField.isKind(of: SATextField.self)
         {
-            textFieldExample1.containsValidInput(range: range, string: string, shouldUpdateUI: true)
-        }
-        
-        if textField == textFieldExample2
-        {
-            textFieldExample2.containsValidInput(range: range, string: string, shouldUpdateUI: true)
+            (textField as! SATextField).containsValidInput(range: range, string: string, shouldUpdateUI: true)
         }
         
         return true
+    }
+    
+    // Example Of Sample Trim Method Used By TextField
+    func textFieldDidEndEditing(_ textField: UITextField)
+    {
+        textFieldExample1.text = textFieldExample1.text?.trim()
+        textFieldExample2.text = textFieldExample2.text?.trim()
     }
     
     // Example Of How To Run Validations

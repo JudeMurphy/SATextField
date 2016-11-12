@@ -62,29 +62,33 @@ class SATextField: UITextField
         
         switch type
         {
-            case .FirstName:
-                self.autocapitalizationType = .words
-                self.isSecureTextEntry = false
-                self.placeholder = " First Name"
+        case .FirstName:
+            self.autocapitalizationType = .words
+            self.isSecureTextEntry = false
+            self.placeholder = " First Name"
+            self.keyboardType = .default
             
-            case .LastName:
-                self.autocapitalizationType = .words
-                self.isSecureTextEntry = false
-                self.placeholder = " Last Name"
+        case .LastName:
+            self.autocapitalizationType = .words
+            self.isSecureTextEntry = false
+            self.placeholder = " Last Name"
+            self.keyboardType = .default
             
-            case .Email:
-                self.autocapitalizationType = .none
-                self.isSecureTextEntry = false
-                self.placeholder = " Email"
+        case .Email:
+            self.autocapitalizationType = .none
+            self.isSecureTextEntry = false
+            self.placeholder = " Email"
+            self.keyboardType = .emailAddress
             
-            case .Password:
-                self.autocapitalizationType = .none
-                self.isSecureTextEntry = true
-                self.placeholder = " Password"
+        case .Password:
+            self.autocapitalizationType = .none
+            self.isSecureTextEntry = true
+            self.placeholder = " Password"
+            self.keyboardType = .default
             
-            default:
-                self.autocapitalizationType = .none
-                self.isSecureTextEntry = false
+        default:
+            self.autocapitalizationType = .none
+            self.isSecureTextEntry = false
         }
         
         self.autocorrectionType = .no

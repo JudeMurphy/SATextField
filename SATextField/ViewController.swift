@@ -34,10 +34,11 @@ class ViewController: UIViewController, UITextFieldDelegate
         
         // Alternative Example - If Storyboarded
         textFieldExample1.type(textFieldType: .PhoneNumber)
-        textFieldExample2.type(textFieldType: .FirstName)
+        textFieldExample2.type(textFieldType: .Email)
     }
     
     // Example Of How To Utilize Built-In Validation Features Of SATextField
+    // NEED THIS METHOD FOR VALIDATION METHOD TO WORK
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
     {
         // Don't Allow The User To Enter A Space

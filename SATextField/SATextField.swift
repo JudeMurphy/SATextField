@@ -107,8 +107,8 @@ class SATextField: UITextField
     func containsValidInput(range: NSRange, string: String, shouldUpdateUI : Bool)
     {
         // Gets Current String In Corresponding TextField
-        let text: NSString = (self.text ?? "") as NSString
-        let replacementString = text.replacingCharacters(in: range, with: string)
+        let textFieldText: NSString = (self.text ?? "") as NSString
+        let replacementString = textFieldText.replacingCharacters(in: range, with: string)
         
         // Required To Fix Validation Bug
         if string == " "
@@ -146,7 +146,8 @@ class SATextField: UITextField
         }
         else if (self.type == .PhoneNumber)
         {
-            if (replacementString.isValidPhoneNumber())
+            if (replacementString.isValidPhoneNumber() &&
+                replacementString.characters.count >= 7)
             {
                 self.isValidated = true
             }

@@ -23,6 +23,7 @@ enum TextFieldType
     case FirstName
     case LastName
     case Password
+    case PhoneNumber
 }
 
 class SATextField: UITextField
@@ -37,28 +38,28 @@ class SATextField: UITextField
     init(frame: CGRect, type: TextFieldType)
     {
         super.init(frame: frame)
-        self.defineType(type: type);
+        self.type(textFieldType: type);
     }
     
     // Override Initializers
     required init(coder aDecoder: NSCoder)
     {
         super.init(coder: aDecoder)!
-        defineType(type: .None);
+        type(textFieldType: .None);
     }
     
     // Override Initializers
     required override init(frame: CGRect)
     {
         super.init(frame: frame)
-        defineType(type: .None);
+        type(textFieldType: .None);
     }
     
     //______________________________________________________________
     // Define TextField Properties Based Type
-    func defineType(type: TextFieldType)
+    func type(textFieldType: TextFieldType)
     {
-        self.type = type
+        self.type = textFieldType
         
         switch type
         {
@@ -86,6 +87,12 @@ class SATextField: UITextField
             self.placeholder = " Password"
             self.keyboardType = .default
             
+        case .PhoneNumber:
+            self.autocapitalizationType = .none
+            self.isSecureTextEntry = false
+            self.placeholder = " Phone Number"
+            self.keyboardType = .default
+            
         default:
             self.autocapitalizationType = .none
             self.isSecureTextEntry = false
@@ -108,7 +115,7 @@ class SATextField: UITextField
         {
             // Do Nothing
         }
-        // Check If There Is Any Text
+            // Check If There Is Any Text
         else if(replacementString.characters.count == 0)
         {
             self.isValidated = false
@@ -129,6 +136,17 @@ class SATextField: UITextField
         {
             // Check If Password Is Equal To/Greater Than 8 Characters
             if (replacementString.characters.count) > 7
+            {
+                self.isValidated = true
+            }
+            else
+            {
+                self.isValidated = false
+            }
+        }
+        else if (self.type == .PhoneNumber)
+        {
+            if (replacementString.isValidPhoneNumber())
             {
                 self.isValidated = true
             }
@@ -181,15 +199,19 @@ class SATextField: UITextField
 // Required Extensions For String Validation
 extension String
 {
-    func trim() -> String
-    {
+    func trim() -> String {
         return self.trimmingCharacters(in: NSCharacterSet.whitespaces)
     }
     
-    func isValidEmail() -> Bool
-    {
+    func isValidEmail() -> Bool {
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
+    
+    func isValidPhoneNumber() -> Bool {
+        let charcterSet  = NSCharacterSet(charactersIn: "+0123456789").inverted
+        let inputString = self.components(separatedBy: charcterSet)
+        let filtered = inputString.joined(separator: "")
+        return self == filtered
+    }
 }
-

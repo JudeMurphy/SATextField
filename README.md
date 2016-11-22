@@ -28,6 +28,7 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
     // Don't Allow The User To Enter A Space
     if textField.isKind(of: SATextField.self)
     {
+        // Can Change shouldUpdateUI to false
         (textField as! SATextField).containsValidInput(range: range, string: string, shouldUpdateUI: true)
     }
         

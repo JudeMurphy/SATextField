@@ -38,7 +38,7 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
 // Example Of How To Run Validations
 @IBAction func validateTextFields(_ sender: AnyObject)
 {
-    if ((textFieldExample1.textIsValidated() && textFieldExample2.textIsValidated()) == true)
+    if (textFieldExample1.textIsValidated() == true)
     {
         print("ALL TEXTFIELDS HAVE BEEN VALIDATED")
     }
@@ -56,7 +56,6 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
 func textFieldDidEndEditing(_ textField: UITextField)
 {
    textFieldExample1.text = textFieldExample1.text?.trim()
-   textFieldExample2.text = textFieldExample2.text?.trim()
 }
 ```
 

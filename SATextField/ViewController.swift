@@ -31,6 +31,10 @@ class ViewController: UIViewController, UITextFieldDelegate
         textFieldExample2.center.x = self.view.center.x
         textFieldExample2.delegate = self
         self.view.addSubview(textFieldExample2)
+        
+        // Alternative Example - If Storyboarded
+        textFieldExample1.type(textFieldType: .PhoneNumber)
+        textFieldExample2.type(textFieldType: .FirstName)
     }
     
     // Example Of How To Utilize Built-In Validation Features Of SATextField

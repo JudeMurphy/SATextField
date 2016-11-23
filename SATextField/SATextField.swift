@@ -10,7 +10,7 @@ import UIKit
 
 /*
  Callable Methods
- func defineType(type: TextFieldType)
+ func type(type: TextFieldType)
  func textIsValidated() -> Bool
  */
 

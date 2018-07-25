@@ -26,8 +26,7 @@ self.view.addSubview(textFieldExample1)
 func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool 
 {
     // Don't Allow The User To Enter A Space
-    if textField.isKind(of: SATextField.self)
-    {
+    if textField.isKind(of: SATextField.self) {
         // Can Change shouldUpdateUI to false
         (textField as! SATextField).containsValidInput(range: range, string: string, shouldUpdateUI: true)
     }

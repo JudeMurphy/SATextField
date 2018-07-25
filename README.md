@@ -39,8 +39,7 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
 {
     if (textFieldExample1.textIsValidated() == true) {
         print("ALL TEXTFIELDS HAVE BEEN VALIDATED")
-    }
-    else {
+    } else {
         print("THERE ARE ONE ORE MORE TEXTFIELDS THAT HAVE NOT BEEN VALIDATED")
     }
 }

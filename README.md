@@ -23,7 +23,7 @@ self.view.addSubview(textFieldExample1)
 ```swift
 // Example Of How To Utilize Built-In Validation Features Of SATextField
 // NEED THIS METHOD FOR VALIDATION METHOD TO WORK
-func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool
+func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool 
 {
     // Don't Allow The User To Enter A Space
     if textField.isKind(of: SATextField.self)
@@ -38,12 +38,10 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
 // Example Of How To Run Validations
 @IBAction func validateTextFields(_ sender: AnyObject)
 {
-    if (textFieldExample1.textIsValidated() == true)
-    {
+    if (textFieldExample1.textIsValidated() == true) {
         print("ALL TEXTFIELDS HAVE BEEN VALIDATED")
     }
-    else
-    {
+    else {
         print("THERE ARE ONE ORE MORE TEXTFIELDS THAT HAVE NOT BEEN VALIDATED")
     }
 }
@@ -53,8 +51,7 @@ func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange
 
 ```swift
 // Example Of Sample Trim Method Used By TextField
-func textFieldDidEndEditing(_ textField: UITextField)
-{
+func textFieldDidEndEditing(_ textField: UITextField) {
    textFieldExample1.text = textFieldExample1.text?.trim()
 }
 ```
